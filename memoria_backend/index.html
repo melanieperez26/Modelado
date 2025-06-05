@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Memoria</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #d0bfff, #f0c0ff);
+            margin: 0;
+            padding: 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin-top: 20px;
+            color: #4a0072;
+        }
+
+        .panel {
+            margin: 20px 0;
+            font-size: 18px;
+        }
+
+        button {
+            padding: 8px 15px;
+            font-size: 16px;
+            border-radius: 8px;
+            background-color: #6a1b9a;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4a0072;
+        }
+
+        .tablero {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .carta {
+            width: 100px;
+            height: 100px;
+            background-color: #9c27b0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+            user-select: none;
+        }
+
+        .carta.volteada {
+            background-color: #e1bee7;
+            color: black;
+            transform: rotateY(180deg);
+        }
+
+        #mensajeFinal {
+            font-size: 28px;
+            color: #2e7d32;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        #nuevoRecord {
+            font-size: 28px;
+            color: #2e7d32;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .oculto {
+            display: none;
+        }
+
+        #mensajePerdiste {
+            font-size: 24px;
+            color: #c62828;
+            font-weight: bold;
+        }
+
+        #gameOverModal {
+            font-size: 24px;
+            color: #c62828;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🧠 Juego de Memoria</h1>
+
+    <div id="pantallaInicio">
+        <h2>Bienvenido al Juego de Memoria</h2>
+        <label for="nombreJugador">Ingresa tu nombre:</label><br />
+        <input type="text" id="nombreJugador" placeholder="Tu nombre aquí" /><br /><br />
+        <button id="btnIniciar">Iniciar Juego</button>
+    </div>
+
+    <div id="juego" style="display: none;">
+        <div class="panel">
+            <p id="tiempoRestante">Tiempo restante: 60s</p>
+            <p id="record">Récord: --:--</p>
+            <p id="tiempo">Tiempo usado: 00:00</p>
+            <button id="reiniciar">🔄 Reiniciar</button>
+        </div>
+
+        <div class="tablero" id="tablero"></div>
+
+        <div id="mensajeFinal" class="oculto">
+            <p>¡Ganaste! 🎉</p>
+        </div>
+
+        <div id="nuevoRecord" class="oculto">
+            <p>🏆 ¡Nuevo récord!</p>
+        </div>
+
+        <div id="gameOverModal" style="display: none;">
+            <p>¡Perdiste!</p>
+        </div>
+
+        <div id="mensajePerdiste" class="oculto">
+            <h3>⏰ Tiempo agotado. ¡Intenta de nuevo!</h3>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="juego.js"></script>
+</body>
+
+</html>
