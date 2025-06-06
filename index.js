@@ -5,7 +5,18 @@ const path = require('path');
 const { PrismaClient } = require('@prisma/client');
 require('dotenv').config();
 
+const {
+  DB_USER,
+  DB_PASSWORD,
+  DB_HOST,
+  DB_PORT,
+  DB_NAME
+} = process.env;
 
+const DATABASE_URL = `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
+
+// Si usas Prisma, puedes hacer:
+process.env.DATABASE_URL = DATABASE_URL;
 
 const prisma = new PrismaClient();
 const app = express();
@@ -25,10 +36,10 @@ app.get('/', (req, res) => {
 app.post('/api/score', async (req, res) => {
   const { name, score } = req.body;
   try {
-    const newUser = await prisma.user.create({
+    const newScore = await prisma.score.create({
       data: { name, score }
     });
-    res.json(newUser);
+    res.json(newScore);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error al guardar el puntaje' });
