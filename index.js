@@ -16,8 +16,9 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+// Cambia la ruta raíz para servir el index.html del frontend
 app.get('/', (req, res) => {
-  res.send('Servidor funcionando correctamente');
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 

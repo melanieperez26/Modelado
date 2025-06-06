@@ -1,5 +1,5 @@
 const supabaseUrl = 'https://yrmfavcjafhukoepbybq.supabase.co'
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlybWZhdmNqYWZodWtvZXBieWJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0NDI0NjgsImV4cCI6MjA2NDAxODQ2OH0.gX0xoxl8mDzv1_QjjGY5NnIlOUETBN6b4QkIKeBY4eg'
+const supabaxseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlybWZhdmNqYWZodWtvZXBieWJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0NDI0NjgsImV4cCI6MjA2NDAxODQ2OH0.gX0xoxl8mDzv1_QjjGY5NnIlOUETBN6b4QkIKeBY4eg'
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 
 const btnIniciar = document.getElementById("btnIniciar");
