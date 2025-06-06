@@ -5,18 +5,7 @@ const path = require('path');
 const { PrismaClient } = require('@prisma/client');
 require('dotenv').config();
 
-const {
-  DB_USER,
-  DB_PASSWORD,
-  DB_HOST,
-  DB_PORT,
-  DB_NAME
-} = process.env;
 
-const DATABASE_URL = `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
-
-// Si usas Prisma, puedes hacer:
-process.env.DATABASE_URL = DATABASE_URL;
 
 const prisma = new PrismaClient();
 const app = express();
@@ -55,7 +44,7 @@ app.get('/api/highscores', async (req, res) => {
   res.json(top);
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
