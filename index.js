@@ -44,8 +44,7 @@ app.get('/api/highscores', async (req, res) => {
   res.json(top);
 });
 
-const port = process.env.PORT || 8080;
-
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
 });

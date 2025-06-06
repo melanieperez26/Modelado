@@ -204,18 +204,26 @@ const btnIniciar = document.getElementById("btnIniciar");
             crearTablero();
         });
 
-        async function guardarRecordEnBackend(nombre, tiempo) {
-            const { data, error } = await supabase
-                .from('scores')
-                .insert([{ name: nombre, score: tiempo }]);
+        // Configuración del puerto del backend
+const BACKEND_PORT = 3000; // Cambia este valor si usas otro puerto
+const BACKEND_URL = `http://localhost:${BACKEND_PORT}`;
 
-            if (error) {
-                console.error('Error guardando puntaje:', error);
-            } else {
-                console.log('Puntaje guardado en Supabase:', data);
-            }
-        }
-        
+// Ejemplo de cómo usarlo para guardar el récord en tu backend propio (no Supabase)
+async function guardarRecordEnBackendPropio(nombre, tiempo) {
+    try {
+        const response = await fetch(`${BACKEND_URL}/api/score`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: nombre, score: tiempo })
+        });
+        if (!response.ok) throw new Error('Error al guardar el puntaje en backend');
+        const data = await response.json();
+        console.log('Puntaje guardado en backend propio:', data);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 
 
 
