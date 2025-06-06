@@ -20,4 +20,4 @@ RUN npx prisma generate
 EXPOSE 8080
 
 # Inicia la aplicación
-CMD ["npm", "start"]
+CMD ["npm", "index.js"]
