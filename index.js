@@ -6,6 +6,7 @@ const { PrismaClient } = require('@prisma/client');
 require('dotenv').config();
 
 
+
 const prisma = new PrismaClient();
 const app = express();
 
@@ -43,6 +44,8 @@ app.get('/api/highscores', async (req, res) => {
   res.json(top);
 });
 
-app.listen(8080, '0.0.0.0', () => {
-  console.log('Servidor corriendo en http://localhost:3000');
+const port = process.env.PORT || 8080;
+
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
