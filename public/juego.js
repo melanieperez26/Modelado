@@ -216,6 +216,10 @@ const btnIniciar = document.getElementById("btnIniciar");
             }
         }
         
+app.listen(3000, '0.0.0.0', () => {
+  console.log('Servidor corriendo en http://localhost:3000');
+});
+
 
 
 
