@@ -37,7 +37,7 @@ app.post('/api/score', async (req, res) => {
 
 // Obtener top 10 puntajes
 app.get('/api/highscores', async (req, res) => {
-  const top = await prisma.user.findMany({
+  const top = await prisma.score.findMany({
     orderBy: { score: 'desc' },
     take: 10
   });

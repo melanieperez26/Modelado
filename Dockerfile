@@ -16,9 +16,6 @@ COPY . .
 # Ejecuta Prisma generate
 RUN npx prisma generate
 
-# Genera los archivos de Prisma
-RUN npx prisma generate --schema=./prisma/schema.prisma
-
 # Expone el puerto
 EXPOSE 8080
 
