@@ -52,7 +52,7 @@ app.post('/api/scores', async (req, res) => {
 // Obtener top 10 puntajes usando Supabase REST API
 app.get('/api/highscores', async (req, res) => {
   try {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/scores?select=*&order=score.desc&limit=10`, {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/scores?select=*&order=score.asc&limit=10`, {
       headers: {
         'apikey': SUPABASE_SERVICE_KEY,
         'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,

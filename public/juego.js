@@ -77,6 +77,7 @@ const btnIniciar = document.getElementById("btnIniciar");
 
             // Espera a que se actualice el récord global y luego compáralo
             const record = await obtenerRecordGlobal();
+            console.log('Comparando récord:', record, nombreJugador, tiempo); // <-- Log para depuración
             if (record && record.name === nombreJugador && record.score === tiempo) {
                 document.getElementById("nuevoRecord").classList.remove("oculto");
             } else {
@@ -220,8 +221,8 @@ const btnIniciar = document.getElementById("btnIniciar");
             try {
                 const response = await fetch('/api/highscores');
                 const data = await response.json();
+                console.log('Datos récord global:', data); // <-- Agrega este log
                 if (data && data.length > 0) {
-                    // El récord es el primer elemento (mayor score)
                     return data[0];
                 }
                 return null;
