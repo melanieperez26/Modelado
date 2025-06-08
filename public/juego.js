@@ -1,7 +1,3 @@
-const supabaseUrl = 'https://yrmfavcjafhukoepbybq.supabase.co'
-const supabaxseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlybWZhdmNqYWZodWtvZXBieWJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0NDI0NjgsImV4cCI6MjA2NDAxODQ2OH0.gX0xoxl8mDzv1_QjjGY5NnIlOUETBN6b4QkIKeBY4eg'
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
-
 const btnIniciar = document.getElementById("btnIniciar");
         const pantallaInicio = document.getElementById("pantallaInicio");
         const juego = document.getElementById("juego");
@@ -204,18 +200,19 @@ const btnIniciar = document.getElementById("btnIniciar");
             crearTablero();
         });
 
-        async function guardarRecordEnBackend(nombre, tiempo) {
-            const { data, error } = await supabase
-                .from('scores')
-                .insert([{ name: nombre, score: tiempo }]);
-
-            if (error) {
-                console.error('Error guardando puntaje:', error);
-            } else {
-                console.log('Puntaje guardado en Supabase:', data);
+        async function guardarRecordEnBackend(nombre, score) {
+            try {
+                const response = await fetch('/api/scores', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: nombre, score: score })
+                });
+                if (!response.ok) throw new Error('Error al guardar el puntaje');
+                return await response.json();
+            } catch (error) {
+                console.error(error);
             }
         }
-        
 
 
 

@@ -2,13 +2,16 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { PrismaClient } = require('@prisma/client');
 require('dotenv').config();
 
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
-const prisma = new PrismaClient();
+const fetch = require('node-fetch');
+
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
+
 const app = express();
 
 app.use(cors());
@@ -23,27 +26,44 @@ app.get('/', (req, res) => {
 });
 
 
-// Guardar nuevo usuario y puntaje
-app.post('/api/score', async (req, res) => {
+// Guardar nuevo usuario y puntaje usando Supabase REST API
+app.post('/api/scores', async (req, res) => {
   const { name, score } = req.body;
   try {
-    const newScore = await prisma.score.create({
-      data: { name, score }
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/scores`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_SERVICE_KEY,
+        'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify({ name, score })
     });
-    res.json(newScore);
+    const data = await response.json();
+    if (!response.ok) throw new Error(JSON.stringify(data));
+    res.json(data[0]);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Error al guardar el puntaje' });
+    res.status(500).json({ error: 'Error al guardar el puntaje en Supabase' });
   }
 });
 
-// Obtener top 10 puntajes
+// Obtener top 10 puntajes usando Supabase REST API
 app.get('/api/highscores', async (req, res) => {
-  const top = await prisma.score.findMany({
-    orderBy: { score: 'desc' },
-    take: 10
-  });
-  res.json(top);
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/scores?select=*&order=score.desc&limit=10`, {
+      headers: {
+        'apikey': SUPABASE_SERVICE_KEY,
+        'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+      }
+    });
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener los puntajes de Supabase' });
+  }
 });
 
 app.listen(port, () => {

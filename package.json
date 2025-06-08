@@ -19,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/melanieperez26/Modelado/issues"
   },
-  "homepage": "https://github.com/melanieperez26/Modelado#readme"
+  "homepage": "https://github.com/melanieperez26/Modelado#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "node-fetch": "^2.7.0"
+  }
 }
