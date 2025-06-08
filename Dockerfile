@@ -13,9 +13,6 @@ RUN npm install
 # Copia todo el proyecto
 COPY . .
 
-# Ejecuta Prisma generate
-RUN npx prisma generate
-
 # Expone el puerto
 EXPOSE 3000
 
